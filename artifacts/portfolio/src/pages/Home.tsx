@@ -127,13 +127,25 @@ export default function Home() {
               className="prose prose-lg dark:prose-invert prose-p:font-serif prose-p:text-3xl md:prose-p:text-4xl lg:prose-p:text-[2.75rem] prose-p:leading-[1.3] prose-p:text-foreground/90 prose-p:tracking-tight max-w-none"
             >
               <p>
-                I craft digital environments that feel as considered and tactile as physical spaces. 
-                Rooted in quiet confidence and precise typography, my work aims to reduce noise 
-                and elevate meaning. I believe the best interfaces are those you feel rather than simply notice.
+                I'm an IT professional with over 10 years of experience across systems administration, 
+                virtualization, and cybersecurity, spanning healthcare, banking, and higher education. 
+                My career started at Mercyhurst University, where I spent six years as the sole systems 
+                administrator for a range of library and web platforms, and I've since moved through 
+                progressively more technical and security-focused roles, including incident response at 
+                CNB Bank, application systems analysis at Marquette Savings Bank, and most recently, 
+                infrastructure administration at UPMC, where I managed a 200+ server VMware environment 
+                with zero unplanned downtime.
               </p>
               <p className="mt-16 text-lg md:text-xl font-sans font-light text-muted-foreground leading-relaxed tracking-normal max-w-2xl">
-                Currently based in Stockholm, focusing on minimal aesthetics and human-centric interaction design. 
-                Always exploring the tension between structured, disciplined layouts and fluid, organic movement.
+                What ties my career together is reliability. Whether I'm managing PKI certificate renewals 
+                with zero lapses, monitoring SIEM alerts, or writing the runbook that lets the next person 
+                pick up where I left off, I care about systems working the way people expect them to, every 
+                time. I hold a B.S. in Cyber Security and have built hands-on expertise in VMware, Azure, 
+                Active Directory, backup and disaster recovery, and security monitoring along the way.
+              </p>
+              <p className="mt-10 text-lg md:text-xl font-sans font-light text-muted-foreground leading-relaxed tracking-normal max-w-2xl">
+                I'm currently looking for a role where I can apply that same discipline at a broader scale, 
+                ideally somewhere the work has a clear sense of purpose behind it, not just uptime metrics.
               </p>
             </motion.div>
           </div>
