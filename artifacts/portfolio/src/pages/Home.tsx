@@ -130,11 +130,11 @@ export default function Home() {
             >
               <div className="flex items-center gap-6">
                 <div className="w-12 h-px bg-muted-foreground/40" />
-                <p className="font-sans text-[10px] tracking-[0.2em] uppercase">Digital Designer</p>
+                <p className="font-sans text-[10px] tracking-[0.2em] uppercase">Infrastructure & Systems</p>
               </div>
               <div className="flex items-center gap-6">
                 <div className="w-12 h-px bg-muted-foreground/40" />
-                <p className="font-sans text-[10px] tracking-[0.2em] uppercase">Art Director</p>
+                <p className="font-sans text-[10px] tracking-[0.2em] uppercase">Cybersecurity</p>
               </div>
             </motion.div>
           </div>
