@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { Mail, Twitter, Linkedin, Lock, Server, Shield } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Twitter, Linkedin, Lock, Server, Shield, ArrowUp } from 'lucide-react';
+import { useEffect } from 'react';
 import heroImage from '@assets/me_1784560759993.jpg';
 import { useGetGuestbook, usePostGuestbook } from '@workspace/api-client-react';
 import { useToast } from '@/hooks/use-toast';
@@ -154,7 +155,14 @@ export default function Home() {
 
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
+  const [showTop, setShowTop] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -605,6 +613,23 @@ export default function Home() {
           <p>Designed with intention</p>
         </div>
       </footer>
+
+      {/* Back to top */}
+      <AnimatePresence>
+        {showTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            aria-label="Back to top"
+            className="fixed bottom-8 right-8 z-50 w-10 h-10 flex items-center justify-center border border-border/60 bg-card text-muted-foreground hover:border-primary hover:text-primary transition-colors rounded-sm shadow-lg"
+          >
+            <ArrowUp className="w-4 h-4" strokeWidth={1.5} />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
     </div>
   );
