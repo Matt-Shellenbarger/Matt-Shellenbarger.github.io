@@ -182,13 +182,13 @@ export default function Home() {
               className="flex flex-col gap-6 max-w-2xl"
             >
               <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
-                IT professional with 10+ years across systems administration, virtualization, and cybersecurity — spanning healthcare, banking, and higher education. Most recently at UPMC, managing a 200+ server VMware environment with zero unplanned downtime.
+                IT professional with 10+ years across systems administration, virtualization, and cybersecurity, spanning healthcare, banking, and higher education. Most recently at UPMC, managing a 200+ server VMware environment with zero unplanned downtime.
               </p>
               <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
-                What ties my career together is reliability — PKI renewals with zero lapses, SIEM monitoring, and documentation that lets the next person hit the ground running. B.S. in Cyber Security, with hands-on depth in VMware, Azure, Active Directory, and backup &amp; disaster recovery.
+                What ties my career together is reliability: PKI renewals with zero lapses, SIEM monitoring, and documentation that lets the next person hit the ground running. B.S. in Cyber Security, with hands-on depth in VMware, Azure, Active Directory, and backup &amp; disaster recovery.
               </p>
               <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
-                Looking for a role where disciplined infrastructure work serves a clear purpose — not just uptime metrics.
+                Looking for a role where disciplined infrastructure work serves a clear purpose, not just uptime metrics.
               </p>
             </motion.div>
           </div>
