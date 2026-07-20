@@ -139,21 +139,19 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <div className="md:col-span-5 relative order-1 md:order-2 h-[50vh] md:h-[75vh] w-full">
+          <div className="md:col-span-5 relative order-1 md:order-2 w-full">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full h-full relative overflow-hidden"
+              className="w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-[3/4] lg:aspect-[4/5] relative overflow-hidden rounded-sm"
             >
-              <motion.div style={{ y }} className="absolute inset-[-10%] w-[120%] h-[120%]">
-                <img 
-                  src={heroImage} 
-                  alt="Portrait of Matt Shellenbagrer" 
-                  className="w-full h-full object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-primary/5 mix-blend-multiply" />
-              </motion.div>
+              <img 
+                src={heroImage} 
+                alt="Portrait of Matt Shellenbagrer" 
+                className="absolute inset-0 w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-background/10 mix-blend-multiply" />
             </motion.div>
           </div>
           
@@ -247,6 +245,44 @@ export default function Home() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-border/40">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+          <div className="md:col-span-4">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground sticky top-32"
+            >
+              Education
+            </motion.h2>
+          </div>
+          <div className="md:col-span-8 md:pl-12">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col divide-y divide-border/40"
+            >
+              <div className="pb-10 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                <div>
+                  <p className="font-sans text-base font-medium text-foreground">B.S. Cyber Security</p>
+                  <p className="font-sans text-sm text-muted-foreground mt-1">Southern New Hampshire University</p>
+                </div>
+              </div>
+              <div className="pt-10 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                <div>
+                  <p className="font-sans text-base font-medium text-foreground">A.S. Computer Information Systems</p>
+                  <p className="font-sans text-sm text-muted-foreground mt-1">Tri-State Business Institute</p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
