@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Github, Twitter, Linkedin, Mail } from 'lucide-react';
-import heroImage from '@assets/generated_images/hero.jpg';
+import heroImage from '@assets/me_1784560759993.jpg';
 import project1Image from '@assets/generated_images/project-1.jpg';
 import project2Image from '@assets/generated_images/project-2.jpg';
 import project3Image from '@assets/generated_images/project-3.jpg';
