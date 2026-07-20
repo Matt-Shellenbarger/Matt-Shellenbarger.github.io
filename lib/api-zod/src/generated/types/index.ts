@@ -7,12 +7,5 @@
  */
 
 export * from './createGuestbookEntry';
-export * from './distributionBucket';
-export * from './employmentTypeStats';
 export * from './guestbookEntry';
 export * from './healthStatus';
-export * from './hoursImpactRow';
-export * from './productivitySummary';
-export * from './riskProfileRow';
-export * from './scatterPoint';
-export * from './scoreDistribution';
