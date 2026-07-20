@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Twitter, Linkedin, Lock, Server, Shield, ArrowUp } from 'lucide-react';
-import { useEffect } from 'react';
+import { Mail, Twitter, Linkedin, Lock, Server, Shield, ArrowUp, Send, Bot, RotateCcw } from 'lucide-react';
+import { useEffect, useCallback } from 'react';
 import heroImage from '@assets/me_1784560759993.jpg';
 import { useGetGuestbook, usePostGuestbook } from '@workspace/api-client-react';
 import { useToast } from '@/hooks/use-toast';
@@ -156,6 +156,78 @@ export default function Home() {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [showTop, setShowTop] = useState(false);
+
+  // Q&A state
+  type QAMessage = { role: 'user' | 'assistant'; content: string };
+  const [qaMessages, setQaMessages] = useState<QAMessage[]>([]);
+  const [qaInput, setQaInput] = useState('');
+  const [qaLoading, setQaLoading] = useState(false);
+  const [convId, setConvId] = useState<number | null>(null);
+  const [streamingText, setStreamingText] = useState('');
+
+  const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+  const sendQuestion = useCallback(async (question: string) => {
+    if (!question.trim() || qaLoading) return;
+    const q = question.trim();
+    setQaMessages(prev => [...prev, { role: 'user', content: q }]);
+    setQaInput('');
+    setQaLoading(true);
+    setStreamingText('');
+
+    try {
+      let cid = convId;
+      if (!cid) {
+        const res = await fetch(`${BASE}/api/anthropic/conversations`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: q.slice(0, 60) }),
+        });
+        const conv = await res.json();
+        cid = conv.id;
+        setConvId(cid);
+      }
+
+      const res = await fetch(`${BASE}/api/anthropic/conversations/${cid}/messages`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: q }),
+      });
+
+      const reader = res.body!.getReader();
+      const decoder = new TextDecoder();
+      let full = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const lines = decoder.decode(value).split('\n');
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = JSON.parse(line.slice(6));
+          if (data.done) break;
+          if (data.content) {
+            full += data.content;
+            setStreamingText(full);
+          }
+        }
+      }
+
+      setQaMessages(prev => [...prev, { role: 'assistant', content: full }]);
+      setStreamingText('');
+    } catch {
+      setQaMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }]);
+    } finally {
+      setQaLoading(false);
+    }
+  }, [convId, qaLoading, BASE]);
+
+  const resetQA = useCallback(() => {
+    setQaMessages([]);
+    setQaInput('');
+    setConvId(null);
+    setStreamingText('');
+  }, []);
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -521,6 +593,115 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
+
+        {/* Ask Me Anything */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-24 md:mt-32 pt-16 border-t border-border/40"
+        >
+          <div className="flex items-center justify-between mb-2">
+            <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground flex items-center gap-2">
+              <Bot className="w-3.5 h-3.5" />
+              Ask Me Anything
+            </p>
+            {qaMessages.length > 0 && (
+              <button
+                onClick={resetQA}
+                className="flex items-center gap-1.5 text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+              >
+                <RotateCcw className="w-3 h-3" />
+                Reset
+              </button>
+            )}
+          </div>
+          <p className="font-sans text-sm text-muted-foreground/60 mb-8">
+            Powered by Claude — ask about my experience, skills, or background.
+          </p>
+
+          {/* Suggested questions */}
+          {qaMessages.length === 0 && (
+            <div className="flex flex-wrap gap-2 mb-8">
+              {[
+                'What was your role at UPMC?',
+                'What certifications do you hold?',
+                'Tell me about your VMware experience.',
+                'What cybersecurity skills do you have?',
+                'Are you open to remote work?',
+              ].map(q => (
+                <button
+                  key={q}
+                  onClick={() => sendQuestion(q)}
+                  className="px-3 py-1.5 text-xs font-sans bg-card border border-border/60 text-muted-foreground rounded-sm hover:border-primary hover:text-foreground transition-colors"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Messages */}
+          {qaMessages.length > 0 && (
+            <div className="flex flex-col gap-5 mb-8 max-h-[32rem] overflow-y-auto pr-1">
+              {qaMessages.map((msg, i) => (
+                <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div
+                    className={`max-w-[80%] px-5 py-3.5 rounded-sm text-sm font-sans leading-relaxed ${
+                      msg.role === 'user'
+                        ? 'bg-primary text-background ml-auto'
+                        : 'bg-card border border-border/60 text-muted-foreground'
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+              {qaLoading && streamingText && (
+                <div className="flex gap-3 justify-start">
+                  <div className="max-w-[80%] px-5 py-3.5 rounded-sm text-sm font-sans leading-relaxed bg-card border border-border/60 text-muted-foreground">
+                    {streamingText}
+                    <span className="inline-block w-1 h-3.5 bg-primary/60 ml-0.5 animate-pulse align-middle" />
+                  </div>
+                </div>
+              )}
+              {qaLoading && !streamingText && (
+                <div className="flex gap-3 justify-start">
+                  <div className="px-5 py-3.5 rounded-sm bg-card border border-border/60">
+                    <div className="flex gap-1.5 items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Input */}
+          <form
+            onSubmit={e => { e.preventDefault(); sendQuestion(qaInput); }}
+            className="flex gap-3"
+          >
+            <input
+              type="text"
+              value={qaInput}
+              onChange={e => setQaInput(e.target.value)}
+              placeholder="Ask about my experience, skills, or availability..."
+              disabled={qaLoading}
+              className="flex-1 bg-card border border-border/60 rounded-sm px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/50 transition-colors disabled:opacity-50"
+            />
+            <button
+              type="submit"
+              disabled={qaLoading || !qaInput.trim()}
+              className="px-5 py-3 bg-primary text-background hover:bg-primary/80 transition-colors rounded-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-sans font-medium"
+            >
+              <Send className="w-4 h-4" />
+            </button>
+          </form>
+        </motion.div>
 
         {/* Guestbook */}
         <motion.div

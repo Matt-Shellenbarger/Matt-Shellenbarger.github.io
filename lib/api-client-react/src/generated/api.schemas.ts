@@ -23,3 +23,69 @@ export interface CreateGuestbookEntry {
   message: string;
 }
 
+export interface AnthropicConversation {
+  id: number;
+  title: string;
+  createdAt: string;
+}
+
+export interface AnthropicMessage {
+  id: number;
+  conversationId: number;
+  role: string;
+  content: string;
+  createdAt: string;
+}
+
+export interface AnthropicConversationInput {
+  title: string;
+}
+
+export interface AnthropicMessageInput {
+  content: string;
+}
+
+export interface AnthropicConversationWithMessages {
+  id: number;
+  title: string;
+  createdAt: string;
+  messages: AnthropicMessage[];
+}
+
+export interface AnthropicError {
+  error: string;
+}
+
+export interface OpenrouterConversation {
+  id: number;
+  title: string;
+  createdAt: string;
+}
+
+export interface OpenrouterMessage {
+  id: number;
+  conversationId: number;
+  role: string;
+  content: string;
+  createdAt: string;
+}
+
+export interface OpenrouterConversationInput {
+  title: string;
+}
+
+export interface OpenrouterMessageInput {
+  content: string;
+}
+
+export interface OpenrouterConversationWithMessages {
+  id: number;
+  title: string;
+  createdAt: string;
+  messages: OpenrouterMessage[];
+}
+
+export interface OpenrouterError {
+  error: string;
+}
+

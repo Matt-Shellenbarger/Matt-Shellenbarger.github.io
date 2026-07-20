@@ -12,6 +12,8 @@
   "dependencies": {
     "@workspace/api-zod": "workspace:*",
     "@workspace/db": "workspace:*",
+    "@workspace/integrations-anthropic-ai": "workspace:*",
+    "@workspace/integrations-openrouter-ai": "workspace:*",
     "bad-words": "^4.1.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
