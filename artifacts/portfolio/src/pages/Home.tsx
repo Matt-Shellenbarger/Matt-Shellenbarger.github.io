@@ -105,6 +105,28 @@ export default function Home() {
         refetch();
         toast({ title: 'Thanks for signing!', description: 'Your message has been added to the guestbook.' });
       },
+      onError: (error: unknown) => {
+        const status = (error as { response?: { status?: number } })?.response?.status;
+        if (status === 429) {
+          toast({
+            title: 'Slow down!',
+            description: 'You can sign the guestbook up to 5 times per hour. Please try again later.',
+            variant: 'destructive',
+          });
+        } else if (status === 400) {
+          toast({
+            title: 'Submission rejected',
+            description: 'Your message contains inappropriate content. Please revise and try again.',
+            variant: 'destructive',
+          });
+        } else {
+          toast({
+            title: 'Something went wrong',
+            description: 'Could not sign the guestbook. Please try again.',
+            variant: 'destructive',
+          });
+        }
+      },
     },
   });
 
