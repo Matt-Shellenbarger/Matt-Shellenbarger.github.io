@@ -260,7 +260,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <h2 className="font-serif text-5xl md:text-7xl lg:text-[6rem] mb-12 leading-[0.95] tracking-tight">Let's build<br />something<br />quiet.</h2>
+            <h2 className="font-serif text-5xl md:text-7xl lg:text-[6rem] mb-12 leading-[0.95] tracking-tight">Let's keep<br />the systems<br />running.</h2>
             <a 
               href="mailto:mattda9@gmail.com" 
               className="inline-block text-xl md:text-3xl font-serif text-muted-foreground hover:text-primary transition-colors border-b border-border/50 hover:border-primary pb-2"
