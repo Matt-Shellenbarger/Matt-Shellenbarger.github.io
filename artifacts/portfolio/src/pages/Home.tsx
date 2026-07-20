@@ -181,7 +181,7 @@ export default function Home() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col gap-6 max-w-2xl"
             >
-              <p className="font-sans text-base md:text-lg text-foreground leading-relaxed font-light">
+              <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
                 IT professional with 10+ years across systems administration, virtualization, and cybersecurity — spanning healthcare, banking, and higher education. Most recently at UPMC, managing a 200+ server VMware environment with zero unplanned downtime.
               </p>
               <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
