@@ -6,6 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from './createGuestbookEntry';
-export * from './guestbookEntry';
-export * from './healthStatus';
+export interface CreateGuestbookEntry {
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  message: string;
+}

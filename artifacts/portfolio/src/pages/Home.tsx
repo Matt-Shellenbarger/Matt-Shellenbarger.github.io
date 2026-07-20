@@ -1,6 +1,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, Twitter, Linkedin } from 'lucide-react';
 import heroImage from '@assets/me_1784560759993.jpg';
+import { useGetGuestbook, usePostGuestbook } from '@workspace/api-client-react';
+import { useToast } from '@/hooks/use-toast';
+import { useState, useRef } from 'react';
+import { formatDistanceToNow } from 'date-fns';
 
 type Role = { title: string; period: string; bullets: string[] };
 type Job = { company: string; period: string; roles: Role[] };
@@ -86,6 +90,132 @@ const experience: Job[] = [
     ],
   },
 ];
+
+function GuestbookSection() {
+  const { toast } = useToast();
+  const { data: entries = [], refetch } = useGetGuestbook();
+  const { mutate: postEntry, isPending } = usePostGuestbook({
+    mutation: {
+      onSuccess: () => {
+        setName('');
+        setMessage('');
+        refetch();
+        toast({ title: 'Thanks for signing!', description: 'Your message has been added to the guestbook.' });
+      },
+    },
+  });
+
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !message.trim()) return;
+    postEntry({ data: { name: name.trim(), message: message.trim() } });
+  };
+
+  return (
+    <section id="guestbook" className="py-32 md:py-48 px-6 md:px-12 border-t border-border/40">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-24 md:mb-40"
+        >
+          <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-none mb-4">Guestbook</h2>
+          <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground mt-6">Leave a message</p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="md:col-span-5"
+          >
+            <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="gb-name" className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">
+                  Name
+                </label>
+                <input
+                  id="gb-name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  maxLength={100}
+                  placeholder="Your name"
+                  className="bg-card border border-border/60 rounded-sm px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/50 transition-colors"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="gb-message" className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">
+                  Message
+                </label>
+                <textarea
+                  id="gb-message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                  maxLength={500}
+                  rows={4}
+                  placeholder="Leave a message..."
+                  className="bg-card border border-border/60 rounded-sm px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isPending || !name.trim() || !message.trim()}
+                className="self-start px-8 py-3 bg-foreground text-background font-sans text-xs uppercase tracking-[0.15em] rounded-sm hover:bg-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {isPending ? 'Signing…' : 'Sign the Guestbook'}
+              </button>
+            </form>
+          </motion.div>
+
+          {/* Entries wall */}
+          <div className="md:col-span-7">
+            {entries.length === 0 ? (
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="font-sans text-sm text-muted-foreground/50 italic"
+              >
+                No entries yet — be the first to sign!
+              </motion.p>
+            ) : (
+              <div className="flex flex-col gap-4 max-h-[32rem] overflow-y-auto pr-2">
+                {entries.map((entry, i) => (
+                  <motion.div
+                    key={entry.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.04 }}
+                    className="bg-card border border-border/40 rounded-sm px-6 py-5"
+                  >
+                    <div className="flex items-baseline justify-between gap-4 mb-2">
+                      <p className="font-sans text-sm font-semibold text-foreground truncate">{entry.name}</p>
+                      <p className="font-sans text-xs text-muted-foreground/60 shrink-0">
+                        {formatDistanceToNow(new Date(entry.createdAt), { addSuffix: true })}
+                      </p>
+                    </div>
+                    <p className="font-sans text-sm text-muted-foreground leading-relaxed">{entry.message}</p>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -286,6 +416,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Guestbook Section */}
+      <GuestbookSection />
 
       {/* Footer */}
       <footer id="contact" className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto">

@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: guestbook
+    description: Guestbook operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /guestbook:
+    get:
+      operationId: getGuestbook
+      tags: [guestbook]
+      summary: Get guestbook entries
+      description: Returns guestbook entries in reverse-chronological order (newest first), up to 100 entries
+      responses:
+        "200":
+          description: List of guestbook entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuestbookEntry"
+    post:
+      operationId: postGuestbook
+      tags: [guestbook]
+      summary: Create a guestbook entry
+      description: Adds a new entry to the guestbook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGuestbookEntry"
+      responses:
+        "201":
+          description: Created guestbook entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +68,32 @@ components:
           type: string
       required:
         - status
-
+    GuestbookEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - message
+        - createdAt
+    CreateGuestbookEntry:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+      required:
+        - name
+        - message
