@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Mail, Twitter, Linkedin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Twitter, Linkedin, Lock, Server, Shield } from 'lucide-react';
 import heroImage from '@assets/me_1784560759993.jpg';
 import { useGetGuestbook, usePostGuestbook } from '@workspace/api-client-react';
 import { useToast } from '@/hooks/use-toast';
@@ -91,10 +91,32 @@ const experience: Job[] = [
   },
 ];
 
-export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+const skills = [
+  'VMware ESXi', 'Azure', 'Active Directory', 'PKI / Certificate Management',
+  'SIEM', 'Incident Response', 'Backup & DR', 'OS Patching',
+  'Runbook Authoring', 'Drupal', 'SharePoint', 'SQL',
+  'Dell IDPA', 'Windows Server', 'Koha ILS', 'Purple Teaming',
+];
 
+const achievements = [
+  {
+    icon: Lock,
+    title: 'PKI at Scale',
+    body: 'Managed 200+ certificate renewals annually across all systems with zero coverage lapses or service disruptions.',
+  },
+  {
+    icon: Server,
+    title: 'VMware Infrastructure',
+    body: 'Sole administrator of a 200+ server ESXi environment across production, staging, and sandbox tiers at UPMC.',
+  },
+  {
+    icon: Shield,
+    title: 'Incident Response',
+    body: 'Monitored SIEM queues and led cybersecurity alert triage at CNB Bank, improving mean time to resolution.',
+  },
+];
+
+export default function Home() {
   const { toast } = useToast();
   const { data: entries = [], refetch } = useGetGuestbook();
   const { mutate: postEntry, isPending } = usePostGuestbook({
@@ -141,13 +163,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden selection:bg-primary/20 selection:text-foreground">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground border-t-2 border-primary">
+
       {/* Navigation */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="fixed top-0 left-0 right-0 z-50 p-6 md:p-12 flex justify-between items-center mix-blend-difference text-white"
+        className="fixed top-0 left-0 right-0 z-50 p-6 md:p-10 flex justify-between items-center mix-blend-difference text-white"
       >
         <div className="font-serif italic text-lg tracking-wide">MS</div>
         <div className="text-xs font-sans uppercase tracking-[0.18em] flex gap-8">
@@ -157,58 +180,120 @@ export default function Home() {
         </div>
       </motion.nav>
 
-      {/* Hero Section */}
-      <section className="min-h-[100dvh] pt-32 pb-24 md:pt-48 md:pb-32 px-6 md:px-12 flex flex-col">
-        <div className="flex-1 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-center">
+      {/* ── Hero ── */}
+      <section className="pt-32 pb-20 md:pt-44 md:pb-28 px-6 md:px-12 max-w-6xl mx-auto">
+        <div className="flex flex-col-reverse md:flex-row items-start gap-12 md:gap-16">
 
-          <div className="md:col-span-7 flex flex-col justify-center order-2 md:order-1 relative z-10">
+          {/* Left: text */}
+          <div className="flex-1">
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-serif text-6xl md:text-8xl lg:text-[8rem] leading-[0.9] text-foreground tracking-tight"
+              className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.0] tracking-tight text-foreground mb-4"
             >
               Matt<br />Shellenbarger
             </motion.h1>
 
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-primary text-base md:text-lg font-sans font-medium tracking-wide mb-5"
+            >
+              Infrastructure &amp; Systems · Cybersecurity
+            </motion.p>
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="mt-12 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-12 text-muted-foreground"
+              transition={{ duration: 0.8, delay: 0.65 }}
+              className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground font-sans font-mono mb-7"
             >
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-px bg-muted-foreground/40" />
-                <p className="font-sans text-xs tracking-[0.18em] uppercase">Infrastructure & Systems</p>
-              </div>
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-px bg-muted-foreground/40" />
-                <p className="font-sans text-xs tracking-[0.18em] uppercase">Cybersecurity</p>
-              </div>
+              <span>10+ Years Experience</span>
+              <span className="text-border">•</span>
+              <span>200+ Servers Managed</span>
+              <span className="text-border">•</span>
+              <span>Zero Unplanned Downtime</span>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.75 }}
+              className="text-base md:text-lg text-muted-foreground font-sans font-normal leading-relaxed max-w-xl mb-10"
+            >
+              Building and securing scalable server environments with zero compromises on reliability. 10+ years driving uptime across VMware, Azure, and critical infrastructure.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="flex flex-wrap gap-4"
+            >
+              <a
+                href="#work"
+                className="px-6 py-3 bg-primary text-background font-sans font-medium text-sm hover:bg-primary/80 transition-colors"
+              >
+                View Experience
+              </a>
+              <a
+                href="#contact"
+                className="px-6 py-3 bg-card text-foreground border border-border font-sans text-sm hover:border-primary transition-colors"
+              >
+                Contact Me
+              </a>
             </motion.div>
           </div>
 
-          <div className="md:col-span-5 relative order-1 md:order-2 w-full">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-[3/4] lg:aspect-[4/5] relative overflow-hidden rounded-sm"
-            >
-              <img
-                src={heroImage}
-                alt="Portrait of Matt Shellenbarger"
-                className="absolute inset-0 w-full h-full object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-background/10 mix-blend-multiply" />
-            </motion.div>
-          </div>
+          {/* Right: photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="shrink-0 w-full md:w-auto"
+          >
+            <img
+              src={heroImage}
+              alt="Portrait of Matt Shellenbarger"
+              className="w-full md:w-[260px] lg:w-[300px] h-[320px] md:h-[370px] object-cover object-top border border-primary block"
+            />
+          </motion.div>
 
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-border/40">
+      {/* ── Notable Achievements ── */}
+      <section className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-t border-border/40">
+        <motion.h2
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="font-serif text-2xl md:text-3xl text-foreground mb-10"
+        >
+          Notable Achievements
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {achievements.map((a, i) => (
+            <motion.div
+              key={a.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
+              className="border-l-2 border-primary border border-border/60 bg-card p-6 hover:border-primary/70 transition-colors"
+            >
+              <a.icon className="text-primary mb-4 w-5 h-5" strokeWidth={1.5} />
+              <h3 className="font-sans font-semibold text-foreground mb-2">{a.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{a.body}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── About ── */}
+      <section id="about" className="py-24 md:py-36 px-6 md:px-12 max-w-6xl mx-auto border-t border-border/40">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-4">
             <motion.h2
@@ -224,7 +309,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col gap-6 max-w-2xl"
             >
@@ -242,48 +327,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="work" className="py-32 md:py-48 px-6 md:px-12 bg-card border-y border-border/40">
-        <div className="max-w-7xl mx-auto">
+      {/* ── Experience ── */}
+      <section id="work" className="py-24 md:py-36 px-6 md:px-12 bg-card border-y border-border/40">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="mb-24 md:mb-40 flex items-end justify-between"
+            className="mb-16 md:mb-20 flex items-end justify-between"
           >
-            <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-none">Experience</h2>
+            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-tight leading-none">Experience</h2>
             <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground hidden md:block">2014 — Present</p>
           </motion.div>
 
-          <div className="flex flex-col divide-y divide-border/40">
+          {/* Timeline */}
+          <div className="relative border-l border-border/60 ml-2 space-y-14">
             {experience.map((job, jobIndex) => (
               <motion.div
                 key={job.company}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: jobIndex * 0.05 }}
-                className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 py-16 md:py-20"
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: jobIndex * 0.06 }}
+                className="relative pl-10"
               >
-                <div className="md:col-span-4 md:pr-8">
-                  <p className="font-serif text-2xl md:text-3xl text-foreground leading-tight mb-2">{job.company}</p>
-                  <p className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">{job.period}</p>
-                </div>
+                {/* dot */}
+                <div className="absolute -left-[6.5px] top-1.5 w-3 h-3 rounded-full bg-primary shadow-[0_0_0_4px_hsl(var(--card))]" />
 
-                <div className="md:col-span-8 flex flex-col gap-12">
+                <p className="font-serif text-xl md:text-2xl text-foreground mb-1">{job.company}</p>
+                <p className="font-sans text-xs uppercase tracking-[0.14em] text-muted-foreground mb-5">{job.period}</p>
+
+                <div
+                  className={`border bg-background rounded-sm p-6 space-y-8 ${
+                    jobIndex === 0 ? 'border-primary/40 shadow-[0_4px_24px_-8px_hsl(var(--primary)/0.12)]' : 'border-border/50'
+                  }`}
+                >
                   {job.roles.map((role, roleIndex) => (
                     <div key={roleIndex}>
-                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-6">
-                        <p className="font-sans text-sm font-medium tracking-wide text-foreground">{role.title}</p>
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-4">
+                        <p className="font-sans text-sm font-medium text-foreground">{role.title}</p>
                         {job.roles.length > 1 && (
-                          <p className="font-sans text-xs uppercase tracking-[0.12em] text-muted-foreground/70 shrink-0">{role.period}</p>
+                          <p className="font-sans text-xs font-mono text-muted-foreground shrink-0">{role.period}</p>
                         )}
                       </div>
-                      <ul className="flex flex-col gap-3">
+                      <ul className="flex flex-col gap-2.5">
                         {role.bullets.map((bullet, bIndex) => (
-                          <li key={bIndex} className="flex gap-4 items-start">
-                            <span className="mt-[0.55em] w-1 h-1 bg-primary/60 rotate-45 shrink-0" />
-                            <p className="font-sans text-sm md:text-base text-muted-foreground leading-relaxed font-normal">{bullet}</p>
+                          <li key={bIndex} className="flex gap-3 items-start">
+                            <span className="text-primary mt-[0.35em] shrink-0 font-bold text-xs">›</span>
+                            <p className="font-sans text-sm text-muted-foreground leading-relaxed font-normal">{bullet}</p>
                           </li>
                         ))}
                       </ul>
@@ -296,8 +387,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Education Section */}
-      <section className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-border/40">
+      {/* ── Technical Skills ── */}
+      <section className="py-24 md:py-36 px-6 md:px-12 max-w-6xl mx-auto border-b border-border/40">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+          <div className="md:col-span-4">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground sticky top-32"
+            >
+              Technical Skills
+            </motion.h2>
+          </div>
+          <div className="md:col-span-8 md:pl-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap gap-2"
+            >
+              {skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-3 py-1.5 text-xs font-sans font-medium bg-card border border-border text-muted-foreground rounded-sm hover:border-primary/60 hover:text-foreground transition-colors cursor-default"
+                >
+                  {skill}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Education ── */}
+      <section className="py-24 md:py-36 px-6 md:px-12 max-w-6xl mx-auto border-b border-border/40">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-4">
             <motion.h2
@@ -313,42 +438,40 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col divide-y divide-border/40"
             >
-              <div className="pb-10 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                <div>
-                  <p className="font-sans text-base font-medium text-foreground">B.S. Cyber Security</p>
-                  <p className="font-sans text-sm text-muted-foreground mt-1">Southern New Hampshire University</p>
-                </div>
+              <div className="pb-8">
+                <p className="font-sans text-base font-medium text-foreground">B.S. Cyber Security</p>
+                <p className="font-sans text-sm text-muted-foreground mt-1">Southern New Hampshire University</p>
               </div>
-              <div className="pt-10 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                <div>
-                  <p className="font-sans text-base font-medium text-foreground">A.S. Computer Information Systems</p>
-                  <p className="font-sans text-sm text-muted-foreground mt-1">Tri-State Business Institute</p>
-                </div>
+              <div className="pt-8">
+                <p className="font-sans text-base font-medium text-foreground">A.S. Computer Information Systems</p>
+                <p className="font-sans text-sm text-muted-foreground mt-1">Tri-State Business Institute</p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Contact + Guestbook */}
-      <footer id="contact" className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-border/40">
+      {/* ── Contact + Guestbook ── */}
+      <footer id="contact" className="py-24 md:py-36 px-6 md:px-12 max-w-6xl mx-auto">
 
         {/* CTA row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <h2 className="font-serif text-5xl md:text-7xl lg:text-[6rem] mb-12 leading-[0.95] tracking-tight">Let's keep<br />the systems<br />running.</h2>
+            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-10 leading-[0.95] tracking-tight">
+              Let's keep<br />the systems<br />running.
+            </h2>
             <a
               href="mailto:mattda9@gmail.com"
-              className="inline-block text-base md:text-lg font-sans font-normal text-muted-foreground hover:text-primary transition-colors border-b border-border/50 hover:border-primary pb-2"
+              className="inline-block text-base font-sans font-normal text-muted-foreground hover:text-primary transition-colors border-b border-border/50 hover:border-primary pb-2"
             >
               mattda9@gmail.com
             </a>
@@ -361,12 +484,12 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.2 }}
             className="flex md:justify-end items-end"
           >
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4">
               <a
                 href="https://www.linkedin.com/in/mjshellenbarger/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors group"
+                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors"
               >
                 <Linkedin className="w-4 h-4 shrink-0" strokeWidth={1.5} />
                 Connect on LinkedIn
@@ -375,14 +498,14 @@ export default function Home() {
                 href="https://x.com/MattShellenbar1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors group"
+                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors"
               >
                 <Twitter className="w-4 h-4 shrink-0" strokeWidth={1.5} />
                 Follow on X
               </a>
               <a
                 href="mailto:mattda9@gmail.com"
-                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors group"
+                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4 shrink-0" strokeWidth={1.5} />
                 Send an Email
@@ -476,12 +599,13 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Copyright bar */}
+        {/* Copyright */}
         <div className="mt-24 pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs font-sans text-muted-foreground uppercase tracking-[0.15em]">
           <p>© {new Date().getFullYear()} Matt Shellenbarger</p>
           <p>Designed with intention</p>
         </div>
       </footer>
+
     </div>
   );
 }
