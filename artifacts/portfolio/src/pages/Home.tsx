@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Github, Twitter, Linkedin } from 'lucide-react';
+import { Mail, Twitter, Linkedin } from 'lucide-react';
 import heroImage from '@assets/me_1784560759993.jpg';
 
 type Role = { title: string; period: string; bullets: string[] };
@@ -274,10 +274,10 @@ export default function Home() {
           >
             <h2 className="font-serif text-5xl md:text-7xl lg:text-[6rem] mb-12 leading-[0.95] tracking-tight">Let's build<br />something<br />quiet.</h2>
             <a 
-              href="mailto:hello@mattshellenbagrer.com" 
+              href="mailto:mattda9@gmail.com" 
               className="inline-block text-xl md:text-3xl font-serif text-muted-foreground hover:text-primary transition-colors border-b border-border/50 hover:border-primary pb-2"
             >
-              hello@mattshellenbagrer.com
+              mattda9@gmail.com
             </a>
           </motion.div>
           
@@ -291,17 +291,17 @@ export default function Home() {
             <div className="flex flex-col gap-10">
               <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Connect</p>
               <div className="flex gap-10">
-                <a href="#" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
+                <a href="https://x.com/MattShellenbar1" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
                   <span className="sr-only">Twitter</span>
                   <Twitter className="w-5 h-5" strokeWidth={1.5} />
                 </a>
-                <a href="#" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
+                <a href="https://www.linkedin.com/in/mjshellenbarger/" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
                   <span className="sr-only">LinkedIn</span>
                   <Linkedin className="w-5 h-5" strokeWidth={1.5} />
                 </a>
-                <a href="#" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
-                  <span className="sr-only">GitHub</span>
-                  <Github className="w-5 h-5" strokeWidth={1.5} />
+                <a href="mailto:mattda9@gmail.com" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
+                  <span className="sr-only">Email</span>
+                  <Mail className="w-5 h-5" strokeWidth={1.5} />
                 </a>
               </div>
             </div>
