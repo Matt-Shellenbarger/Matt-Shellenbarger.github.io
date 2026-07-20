@@ -1,35 +1,90 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Github, Twitter, Linkedin } from 'lucide-react';
 import heroImage from '@assets/me_1784560759993.jpg';
-import project1Image from '@assets/generated_images/project-1.jpg';
-import project2Image from '@assets/generated_images/project-2.jpg';
-import project3Image from '@assets/generated_images/project-3.jpg';
 
-const projects = [
+type Role = { title: string; period: string; bullets: string[] };
+type Job = { company: string; period: string; roles: Role[] };
+
+const experience: Job[] = [
   {
-    id: 1,
-    title: 'The Form of Function',
-    description: 'An exploration of minimal interfaces in high-density data environments. Redefining how we perceive complexity while maintaining warmth.',
-    image: project1Image,
-    role: 'Lead Design',
-    year: '2023',
+    company: 'UPMC',
+    period: 'May 2023 – Oct 2025',
+    roles: [
+      {
+        title: 'Associate Software Engineer (Infrastructure & Systems)',
+        period: 'May 2023 – Oct 2025',
+        bullets: [
+          'Administered VMware ESXi environments (v7.0/v8.0) spanning ~200 virtual servers across production, staging, and sandbox tiers — maintaining 99.9%+ uptime through high-availability configuration and off-peak maintenance windows.',
+          'Managed PKI certificate lifecycle for all applicable systems, completing ~200 renewals per year with zero lapses in coverage or service disruption.',
+          'Responded to network security alerts, assessed server-level risks, and coordinated remediation with the security team to minimize exposure across the environment.',
+          'Executed monthly OS patching, datacenter host provisioning, and Dell IDPA backup administration to ensure stability, compliance, and recoverability.',
+          'Authored runbooks, operational procedures, and system documentation to support audit readiness, team onboarding, and knowledge transfer.',
+          'Mentored new team members across VMware and backup systems; led UAT for Contact Center Solution projects, validating releases against business requirements.',
+        ],
+      },
+    ],
   },
   {
-    id: 2,
-    title: 'Kinetic Typography',
-    description: 'A study in motion and meaning, bringing static letterforms to life through physics-based animation and deliberate pacing.',
-    image: project2Image,
-    role: 'Interaction, Concept',
-    year: '2024',
+    company: 'CNB Bank',
+    period: 'Feb 2023 – May 2023',
+    roles: [
+      {
+        title: 'Jr. Incident Response Analyst (contract)',
+        period: 'Feb 2023 – May 2023',
+        bullets: [
+          'Monitored SIEM queues and triaged cybersecurity alerts, escalating confirmed incidents to senior analysts while documenting findings and remediation steps.',
+          'Served as first-line contact for staff security inquiries and contributed to incident response playbook improvements that reduced mean time to resolution.',
+        ],
+      },
+    ],
   },
   {
-    id: 3,
-    title: 'Space & Light',
-    description: 'Architectural digital mockups blending brutalist structure with warm Scandinavian sensibilities. A quiet sanctuary on the web.',
-    image: project3Image,
-    role: 'Art Direction',
-    year: '2024',
-  }
+    company: 'Marquette Savings Bank',
+    period: 'Jul 2018 – Feb 2023',
+    roles: [
+      {
+        title: 'Application Systems Analyst II',
+        period: 'Jan 2022 – Feb 2023',
+        bullets: [
+          'Led end-to-end project lifecycle for banking system enhancements — from requirements gathering and design through deployment — coordinating with internal stakeholders and external vendors.',
+          'Collaborated with external security auditors in purple teaming exercises, monitored SIEM dashboards, and identified and mitigated security risks across banking systems.',
+        ],
+      },
+      {
+        title: 'Application Systems Analyst I',
+        period: 'Jul 2020 – Jan 2022',
+        bullets: [
+          'Coordinated planning, design, and deployment of system projects and enhancements, ensuring deliverables met business requirements and timelines.',
+          'Performed root cause analyses, documented process deficiencies, and recommended solutions to resolve workflow gaps and improve reliability.',
+          'Proactively analyzed system behavior to identify and address performance bottlenecks before they impacted end users.',
+        ],
+      },
+      {
+        title: 'System Operator',
+        period: 'Jul 2018 – Jul 2020',
+        bullets: [
+          'Administered nightly BOSS batch processing, monitored all application jobs, and reported errors to mitigate operational and financial risk.',
+          'Executed end-of-day processing, nightly backups, print/burst operations, and secure file transmission to vendors including FIS (AS/400).',
+          'Supported IT operations via Active Directory account management and new hire workstation configuration and deployment.',
+        ],
+      },
+    ],
+  },
+  {
+    company: 'Mercyhurst University',
+    period: 'Aug 2014 – Jul 2020',
+    roles: [
+      {
+        title: 'Library Computer Support Specialist',
+        period: 'Aug 2014 – Jul 2020',
+        bullets: [
+          'Sole systems administrator for 10+ library software platforms (Koha ILS, OCLC, EBSCO EDS, Springshare suite, PastPerfect, Refworks) and five Drupal/SharePoint web properties.',
+          'Trained and mentored library staff on systems and best practices; developed SQL reports providing actionable usage and collections data.',
+          'Maintained hardware inventory, deployed and supported all library computers, and managed workstation configuration across the department.',
+        ],
+      },
+    ],
+  },
 ];
 
 export default function Home() {
@@ -152,58 +207,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Experience Section */}
       <section id="work" className="py-32 md:py-48 px-6 md:px-12 bg-card border-y border-border/40">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="mb-24 md:mb-40 flex items-end justify-between"
           >
-            <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-none">Selected<br />Work</h2>
-            <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-muted-foreground hidden md:block">2021 — Present</p>
+            <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-none">Experience</h2>
+            <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-muted-foreground hidden md:block">2014 — Present</p>
           </motion.div>
 
-          <div className="flex flex-col gap-32 md:gap-56">
-            {projects.map((project, i) => (
-              <motion.div 
-                key={project.id}
-                initial={{ opacity: 0, y: 50 }}
+          <div className="flex flex-col divide-y divide-border/40">
+            {experience.map((job, jobIndex) => (
+              <motion.div
+                key={job.company}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-15%" }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className={`grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center ${i % 2 !== 0 ? 'md:grid-flow-col-dense' : ''}`}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: jobIndex * 0.05 }}
+                className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 py-16 md:py-20"
               >
-                <div className={`md:col-span-7 ${i % 2 !== 0 ? 'md:col-start-6' : ''}`}>
-                  <div className="overflow-hidden aspect-[4/5] md:aspect-[3/4] group relative bg-muted">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-[2s] ease-[0.16,1,0.3,1] group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-1000" />
-                  </div>
+                {/* Company + period */}
+                <div className="md:col-span-4 md:pr-8">
+                  <p className="font-serif text-2xl md:text-3xl text-foreground leading-tight mb-2">{job.company}</p>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{job.period}</p>
                 </div>
-                
-                <div className={`md:col-span-5 flex flex-col justify-center ${i % 2 !== 0 ? 'md:col-start-1' : 'md:pl-8 lg:pl-16'}`}>
-                  <div className="flex gap-4 items-center text-[10px] font-sans uppercase tracking-[0.2em] text-muted-foreground mb-8">
-                    <span>{project.year}</span>
-                    <span className="w-1 h-1 bg-primary/40 rotate-45" />
-                    <span>{project.role}</span>
-                  </div>
-                  <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-8 leading-[1.1] tracking-tight">{project.title}</h3>
-                  <p className="font-sans text-base md:text-lg text-muted-foreground mb-12 leading-relaxed font-light">
-                    {project.description}
-                  </p>
-                  <a 
-                    href={`#project-${project.id}`} 
-                    className="inline-flex items-center gap-4 font-sans text-[10px] tracking-[0.2em] uppercase text-foreground hover:text-primary transition-colors w-fit group pb-2 border-b border-border/50 hover:border-primary"
-                  >
-                    View Project 
-                    <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-[0.16,1,0.3,1] group-hover:translate-x-2" />
-                  </a>
+
+                {/* Roles */}
+                <div className="md:col-span-8 flex flex-col gap-12">
+                  {job.roles.map((role, roleIndex) => (
+                    <div key={roleIndex}>
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-6">
+                        <p className="font-sans text-sm font-medium tracking-wide text-foreground">{role.title}</p>
+                        {job.roles.length > 1 && (
+                          <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-muted-foreground/70 shrink-0">{role.period}</p>
+                        )}
+                      </div>
+                      <ul className="flex flex-col gap-3">
+                        {role.bullets.map((bullet, bIndex) => (
+                          <li key={bIndex} className="flex gap-4 items-start">
+                            <span className="mt-[0.55em] w-1 h-1 bg-primary/60 rotate-45 shrink-0" />
+                            <p className="font-sans text-sm md:text-base text-muted-foreground leading-relaxed font-light">{bullet}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             ))}

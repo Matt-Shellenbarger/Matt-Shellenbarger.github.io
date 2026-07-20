@@ -1,0 +1,29 @@
+Associate Software Engineer (Infrastructure & Systems)  ·  UPMC	May 2023 – Oct 2025
+•	Administered VMware ESXi environments (v7.0/v8.0) spanning ~200 virtual servers across production, staging, and sandbox tiers — maintaining 99.9%+ uptime through high-availability configuration and off-peak maintenance windows.
+•	Managed PKI certificate lifecycle for all applicable systems, completing ~200 renewals per year with zero lapses in coverage or service disruption.
+•	Responded to network security alerts, assessed server-level risks, and coordinated remediation with the security team to minimize exposure across the environment.
+•	Executed monthly OS patching, datacenter host provisioning, and Dell IDPA backup administration to ensure stability, compliance, and recoverability.
+•	Authored runbooks, operational procedures, and system documentation to support audit readiness, team onboarding, and knowledge transfer.
+•	Mentored new team members across VMware and backup systems; led UAT for Contact Center Solution projects, validating releases against business requirements.
+
+Jr. Incident Response Analyst  ·  CNB Bank  (contract)	Feb 2023 – May 2023
+•	Monitored SIEM queues and triaged cybersecurity alerts, escalating confirmed incidents to senior analysts while documenting findings and remediation steps.
+•	Served as first-line contact for staff security inquiries and contributed to incident response playbook improvements that reduced mean time to resolution.
+
+Marquette Savings Bank	Jul 2018 – Feb 2023
+Application Systems Analyst II	Jan 2022 – Feb 2023
+•	Led end-to-end project lifecycle for banking system enhancements — from requirements gathering and design through deployment — coordinating with internal stakeholders and external vendors.
+•	Collaborated with external security auditors in purple teaming exercises, monitored SIEM dashboards, and identified and mitigated security risks across banking systems.
+Application Systems Analyst I	Jul 2020 – Jan 2022
+•	Coordinated planning, design, and deployment of system projects and enhancements, ensuring deliverables met business requirements and timelines.
+•	Performed root cause analyses, documented process deficiencies, and recommended solutions to resolve workflow gaps and improve reliability.
+•	Proactively analyzed system behavior to identify and address performance bottlenecks before they impacted end users.
+System Operator	Jul 2018 – Jul 2020
+•	Administered nightly BOSS batch processing, monitored all application jobs, and reported errors to mitigate operational and financial risk.
+•	Executed end-of-day processing, nightly backups, print/burst operations, and secure file transmission to vendors including FIS (AS/400).
+•	Supported IT operations via Active Directory account management and new hire workstation configuration and deployment.
+
+Library Computer Support Specialist  ·  Mercyhurst University	Aug 2014 – Jul 2020
+•	Sole systems administrator for 10+ library software platforms (Koha ILS, OCLC, EBSCO EDS, Springshare suite, PastPerfect, Refworks) and five Drupal/SharePoint web properties.
+•	Trained and mentored library staff on systems and best practices; developed SQL reports providing actionable usage and collections data.
+•	Maintained hardware inventory, deployed and supported all library computers, and managed workstation configuration across the department.
