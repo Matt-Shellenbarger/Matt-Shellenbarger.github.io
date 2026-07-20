@@ -368,19 +368,25 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors group"
               >
-                <Linkedin className="w-4 h-4 shrink-0 group-hover:text-primary transition-colors" strokeWidth={1.5} />
+                <Linkedin className="w-4 h-4 shrink-0" strokeWidth={1.5} />
                 Connect on LinkedIn
               </a>
-              <div className="flex gap-8 pl-1">
-                <a href="https://x.com/MattShellenbar1" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors hover:-translate-y-1 transform duration-300">
-                  <span className="sr-only">Twitter</span>
-                  <Twitter className="w-4 h-4" strokeWidth={1.5} />
-                </a>
-                <a href="mailto:mattda9@gmail.com" className="text-muted-foreground hover:text-primary transition-colors hover:-translate-y-1 transform duration-300">
-                  <span className="sr-only">Email</span>
-                  <Mail className="w-4 h-4" strokeWidth={1.5} />
-                </a>
-              </div>
+              <a
+                href="https://x.com/MattShellenbar1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors group"
+              >
+                <Twitter className="w-4 h-4 shrink-0" strokeWidth={1.5} />
+                Follow on X
+              </a>
+              <a
+                href="mailto:mattda9@gmail.com"
+                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors group"
+              >
+                <Mail className="w-4 h-4 shrink-0" strokeWidth={1.5} />
+                Send an Email
+              </a>
             </div>
           </motion.div>
         </div>
