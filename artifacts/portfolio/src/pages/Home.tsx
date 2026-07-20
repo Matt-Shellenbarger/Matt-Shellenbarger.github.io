@@ -100,8 +100,8 @@ export default function Home() {
         transition={{ duration: 1, delay: 0.5 }}
         className="fixed top-0 left-0 right-0 z-50 p-6 md:p-12 flex justify-between items-center mix-blend-difference text-white"
       >
-        <div className="font-serif italic text-xl tracking-wide">MS</div>
-        <div className="text-[10px] font-sans uppercase tracking-[0.2em] flex gap-8">
+        <div className="font-serif italic text-lg tracking-wide">MS</div>
+        <div className="text-xs font-sans uppercase tracking-[0.18em] flex gap-8">
           <a href="#about" className="hover:text-white/60 transition-colors">About</a>
           <a href="#work" className="hover:text-white/60 transition-colors">Work</a>
           <a href="#contact" className="hover:text-white/60 transition-colors">Contact</a>
@@ -130,11 +130,11 @@ export default function Home() {
             >
               <div className="flex items-center gap-6">
                 <div className="w-12 h-px bg-muted-foreground/40" />
-                <p className="font-sans text-[10px] tracking-[0.2em] uppercase">Infrastructure & Systems</p>
+                <p className="font-sans text-xs tracking-[0.18em] uppercase">Infrastructure & Systems</p>
               </div>
               <div className="flex items-center gap-6">
                 <div className="w-12 h-px bg-muted-foreground/40" />
-                <p className="font-sans text-[10px] tracking-[0.2em] uppercase">Cybersecurity</p>
+                <p className="font-sans text-xs tracking-[0.18em] uppercase">Cybersecurity</p>
               </div>
             </motion.div>
           </div>
@@ -168,7 +168,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="font-sans text-[10px] uppercase tracking-[0.2em] text-muted-foreground sticky top-32"
+              className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground sticky top-32"
             >
               About Me
             </motion.h2>
@@ -181,13 +181,13 @@ export default function Home() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col gap-6 max-w-2xl"
             >
-              <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
+              <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-normal">
                 IT professional with 10+ years across systems administration, virtualization, and cybersecurity, spanning healthcare, banking, and higher education. Most recently at UPMC, managing a 200+ server VMware environment with zero unplanned downtime.
               </p>
-              <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
+              <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-normal">
                 What ties my career together is reliability: PKI renewals with zero lapses, SIEM monitoring, and documentation that lets the next person hit the ground running. B.S. in Cyber Security, with hands-on depth in VMware, Azure, Active Directory, and backup &amp; disaster recovery.
               </p>
-              <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-light">
+              <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed font-normal">
                 Looking for a role where disciplined infrastructure work serves a clear purpose, not just uptime metrics.
               </p>
             </motion.div>
@@ -205,7 +205,7 @@ export default function Home() {
             className="mb-24 md:mb-40 flex items-end justify-between"
           >
             <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-none">Experience</h2>
-            <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-muted-foreground hidden md:block">2014 — Present</p>
+            <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground hidden md:block">2014 — Present</p>
           </motion.div>
 
           <div className="flex flex-col divide-y divide-border/40">
@@ -221,7 +221,7 @@ export default function Home() {
                 {/* Company + period */}
                 <div className="md:col-span-4 md:pr-8">
                   <p className="font-serif text-2xl md:text-3xl text-foreground leading-tight mb-2">{job.company}</p>
-                  <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{job.period}</p>
+                  <p className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">{job.period}</p>
                 </div>
 
                 {/* Roles */}
@@ -231,14 +231,14 @@ export default function Home() {
                       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-6">
                         <p className="font-sans text-sm font-medium tracking-wide text-foreground">{role.title}</p>
                         {job.roles.length > 1 && (
-                          <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-muted-foreground/70 shrink-0">{role.period}</p>
+                          <p className="font-sans text-xs uppercase tracking-[0.12em] text-muted-foreground/70 shrink-0">{role.period}</p>
                         )}
                       </div>
                       <ul className="flex flex-col gap-3">
                         {role.bullets.map((bullet, bIndex) => (
                           <li key={bIndex} className="flex gap-4 items-start">
                             <span className="mt-[0.55em] w-1 h-1 bg-primary/60 rotate-45 shrink-0" />
-                            <p className="font-sans text-sm md:text-base text-muted-foreground leading-relaxed font-light">{bullet}</p>
+                            <p className="font-sans text-sm md:text-base text-muted-foreground leading-relaxed font-normal">{bullet}</p>
                           </li>
                         ))}
                       </ul>
@@ -263,7 +263,7 @@ export default function Home() {
             <h2 className="font-serif text-5xl md:text-7xl lg:text-[6rem] mb-12 leading-[0.95] tracking-tight">Let's keep<br />the systems<br />running.</h2>
             <a 
               href="mailto:mattda9@gmail.com" 
-              className="inline-block text-xl md:text-3xl font-serif text-muted-foreground hover:text-primary transition-colors border-b border-border/50 hover:border-primary pb-2"
+              className="inline-block text-base md:text-lg font-sans font-normal text-muted-foreground hover:text-primary transition-colors border-b border-border/50 hover:border-primary pb-2"
             >
               mattda9@gmail.com
             </a>
@@ -277,7 +277,7 @@ export default function Home() {
             className="flex md:justify-end items-end"
           >
             <div className="flex flex-col gap-10">
-              <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Connect</p>
+              <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Connect</p>
               <div className="flex gap-10">
                 <a href="https://x.com/MattShellenbar1" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
                   <span className="sr-only">Twitter</span>
@@ -296,7 +296,7 @@ export default function Home() {
           </motion.div>
         </div>
         
-        <div className="mt-40 pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-[10px] font-sans text-muted-foreground uppercase tracking-[0.2em]">
+        <div className="mt-40 pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs font-sans text-muted-foreground uppercase tracking-[0.15em]">
           <p>© {new Date().getFullYear()} Matt Shellenbagrer</p>
           <p>Designed with intention</p>
         </div>
