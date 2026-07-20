@@ -361,20 +361,24 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.2 }}
             className="flex md:justify-end items-end"
           >
-            <div className="flex flex-col gap-10">
-              <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Connect</p>
-              <div className="flex gap-10">
-                <a href="https://x.com/MattShellenbar1" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
+            <div className="flex flex-col gap-8">
+              <a
+                href="https://www.linkedin.com/in/mjshellenbarger/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-7 py-4 border border-border/60 rounded-sm font-sans text-sm font-normal text-foreground hover:border-primary hover:text-primary transition-colors group"
+              >
+                <Linkedin className="w-4 h-4 shrink-0 group-hover:text-primary transition-colors" strokeWidth={1.5} />
+                Connect on LinkedIn
+              </a>
+              <div className="flex gap-8 pl-1">
+                <a href="https://x.com/MattShellenbar1" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors hover:-translate-y-1 transform duration-300">
                   <span className="sr-only">Twitter</span>
-                  <Twitter className="w-5 h-5" strokeWidth={1.5} />
+                  <Twitter className="w-4 h-4" strokeWidth={1.5} />
                 </a>
-                <a href="https://www.linkedin.com/in/mjshellenbarger/" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
-                  <span className="sr-only">LinkedIn</span>
-                  <Linkedin className="w-5 h-5" strokeWidth={1.5} />
-                </a>
-                <a href="mailto:mattda9@gmail.com" className="text-foreground/80 hover:text-primary transition-colors hover:-translate-y-1 transform duration-500 ease-[0.16,1,0.3,1]">
+                <a href="mailto:mattda9@gmail.com" className="text-muted-foreground hover:text-primary transition-colors hover:-translate-y-1 transform duration-300">
                   <span className="sr-only">Email</span>
-                  <Mail className="w-5 h-5" strokeWidth={1.5} />
+                  <Mail className="w-4 h-4" strokeWidth={1.5} />
                 </a>
               </div>
             </div>
