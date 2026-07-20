@@ -178,7 +178,7 @@ export default function Home() {
     try {
       let cid = convId;
       if (!cid) {
-        const res = await fetch(`${BASE}/api/openrouter/conversations`, {
+        const res = await fetch(`${BASE}/api/anthropic/conversations`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ title: q.slice(0, 60) }),
@@ -188,7 +188,7 @@ export default function Home() {
         setConvId(cid);
       }
 
-      const res = await fetch(`${BASE}/api/openrouter/conversations/${cid}/messages`, {
+      const res = await fetch(`${BASE}/api/anthropic/conversations/${cid}/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: q }),
