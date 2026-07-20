@@ -115,7 +115,7 @@ router.post("/openrouter/conversations/:id/messages", async (req, res) => {
   let fullResponse = "";
 
   const stream = await openrouter.chat.completions.create({
-    model: "meta-llama/llama-4-maverick",
+    model: "google/gemma-4-31b-it:free",
     max_tokens: 8192,
     messages: chatMessages,
     stream: true,
