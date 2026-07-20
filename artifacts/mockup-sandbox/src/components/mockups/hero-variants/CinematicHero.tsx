@@ -12,7 +12,7 @@ export function CinematicHero() {
       <div className="absolute inset-0 z-0">
         <img 
           src="/__mockup/images/matt.jpg" 
-          alt="Matt Shellenbagrer" 
+          alt="Matt Shellenbarger" 
           className="w-full h-full object-cover object-top sm:object-center" 
         />
         {/* Dark gradient overlay to make name legible */}
@@ -49,7 +49,7 @@ export function CinematicHero() {
             className="text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem] leading-[0.85] tracking-tight font-light text-[#f4f4f5] mix-blend-plus-lighter"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
-            Matt<br />Shellenbagrer
+            Matt<br />Shellenbarger
           </h1>
 
           {/* Tags */}

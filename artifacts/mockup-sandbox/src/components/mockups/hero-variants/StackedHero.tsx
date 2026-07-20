@@ -29,7 +29,7 @@ export function StackedHero() {
         >
           <h1 className="text-[14vw] sm:text-[12vw] md:text-[9rem] lg:text-[11rem] font-light leading-[0.85] tracking-tight text-[#f0f0f0]">
             <span className="block">Matt</span>
-            <span className="block italic text-[#d0d0d0] -ml-4 md:-ml-8">Shellenbagrer</span>
+            <span className="block italic text-[#d0d0d0] -ml-4 md:-ml-8">Shellenbarger</span>
           </h1>
         </div>
 
@@ -41,7 +41,7 @@ export function StackedHero() {
           
           <img 
             src="/__mockup/images/matt.jpg" 
-            alt="Matt Shellenbagrer" 
+            alt="Matt Shellenbarger" 
             className="w-full h-full object-cover object-top opacity-80"
             style={{ 
               filter: "grayscale(100%) contrast(1.1) brightness(0.9)",

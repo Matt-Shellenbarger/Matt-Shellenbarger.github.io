@@ -21,7 +21,7 @@ export function SplitReverseHero() {
         </div>
         <img 
           src="/__mockup/images/matt.jpg" 
-          alt="Matt Shellenbagrer" 
+          alt="Matt Shellenbarger" 
           className="absolute inset-0 w-full h-full object-cover object-top"
         />
       </div>
@@ -42,7 +42,7 @@ export function SplitReverseHero() {
             style={{ fontFamily: "'Fraunces', serif" }}
           >
             Matt<br />
-            Shellenbagrer
+            Shellenbarger
           </h1>
           
           <div className="flex flex-col gap-6 w-full">

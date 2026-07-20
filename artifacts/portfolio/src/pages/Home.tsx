@@ -168,7 +168,7 @@ export default function Home() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="font-serif text-6xl md:text-8xl lg:text-[8rem] leading-[0.9] text-foreground tracking-tight"
             >
-              Matt<br />Shellenbagrer
+              Matt<br />Shellenbarger
             </motion.h1>
 
             <motion.div
@@ -197,7 +197,7 @@ export default function Home() {
             >
               <img
                 src={heroImage}
-                alt="Portrait of Matt Shellenbagrer"
+                alt="Portrait of Matt Shellenbarger"
                 className="absolute inset-0 w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-background/10 mix-blend-multiply" />
@@ -478,7 +478,7 @@ export default function Home() {
 
         {/* Copyright bar */}
         <div className="mt-24 pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs font-sans text-muted-foreground uppercase tracking-[0.15em]">
-          <p>© {new Date().getFullYear()} Matt Shellenbagrer</p>
+          <p>© {new Date().getFullYear()} Matt Shellenbarger</p>
           <p>Designed with intention</p>
         </div>
       </footer>
