@@ -91,7 +91,10 @@ const experience: Job[] = [
   },
 ];
 
-function GuestbookSection() {
+export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+
   const { toast } = useToast();
   const { data: entries = [], refetch } = useGetGuestbook();
   const { mutate: postEntry, isPending } = usePostGuestbook({
@@ -116,115 +119,9 @@ function GuestbookSection() {
   };
 
   return (
-    <section id="guestbook" className="py-32 md:py-48 px-6 md:px-12 border-t border-border/40">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-24 md:mb-40"
-        >
-          <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-none mb-4">Guestbook</h2>
-          <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground mt-6">Leave a message</p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
-          {/* Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="md:col-span-5"
-          >
-            <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="gb-name" className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                  Name
-                </label>
-                <input
-                  id="gb-name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  maxLength={100}
-                  placeholder="Your name"
-                  className="bg-card border border-border/60 rounded-sm px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/50 transition-colors"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="gb-message" className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                  Message
-                </label>
-                <textarea
-                  id="gb-message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                  maxLength={500}
-                  rows={4}
-                  placeholder="Leave a message..."
-                  className="bg-card border border-border/60 rounded-sm px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/50 transition-colors resize-none"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isPending || !name.trim() || !message.trim()}
-                className="self-start px-8 py-3 bg-foreground text-background font-sans text-xs uppercase tracking-[0.15em] rounded-sm hover:bg-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                {isPending ? 'Signing…' : 'Sign the Guestbook'}
-              </button>
-            </form>
-          </motion.div>
-
-          {/* Entries wall */}
-          <div className="md:col-span-7">
-            {entries.length === 0 ? (
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="font-sans text-sm text-muted-foreground/50 italic"
-              >
-                No entries yet — be the first to sign!
-              </motion.p>
-            ) : (
-              <div className="flex flex-col gap-4 max-h-[32rem] overflow-y-auto pr-2">
-                {entries.map((entry, i) => (
-                  <motion.div
-                    key={entry.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.04 }}
-                    className="bg-card border border-border/40 rounded-sm px-6 py-5"
-                  >
-                    <div className="flex items-baseline justify-between gap-4 mb-2">
-                      <p className="font-sans text-sm font-semibold text-foreground truncate">{entry.name}</p>
-                      <p className="font-sans text-xs text-muted-foreground/60 shrink-0">
-                        {formatDistanceToNow(new Date(entry.createdAt), { addSuffix: true })}
-                      </p>
-                    </div>
-                    <p className="font-sans text-sm text-muted-foreground leading-relaxed">{entry.message}</p>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-
-  return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden selection:bg-primary/20 selection:text-foreground">
       {/* Navigation */}
-      <motion.nav 
+      <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
@@ -241,9 +138,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="min-h-[100dvh] pt-32 pb-24 md:pt-48 md:pb-32 px-6 md:px-12 flex flex-col">
         <div className="flex-1 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-center">
-          
+
           <div className="md:col-span-7 flex flex-col justify-center order-2 md:order-1 relative z-10">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -251,8 +148,8 @@ export default function Home() {
             >
               Matt<br />Shellenbagrer
             </motion.h1>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1 }}
@@ -270,21 +167,21 @@ export default function Home() {
           </div>
 
           <div className="md:col-span-5 relative order-1 md:order-2 w-full">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-[3/4] lg:aspect-[4/5] relative overflow-hidden rounded-sm"
             >
-              <img 
-                src={heroImage} 
-                alt="Portrait of Matt Shellenbagrer" 
+              <img
+                src={heroImage}
+                alt="Portrait of Matt Shellenbagrer"
                 className="absolute inset-0 w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-background/10 mix-blend-multiply" />
             </motion.div>
           </div>
-          
+
         </div>
       </section>
 
@@ -292,7 +189,7 @@ export default function Home() {
       <section id="about" className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-border/40">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-4">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -302,7 +199,7 @@ export default function Home() {
             </motion.h2>
           </div>
           <div className="md:col-span-8 md:pl-12">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -346,13 +243,11 @@ export default function Home() {
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: jobIndex * 0.05 }}
                 className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 py-16 md:py-20"
               >
-                {/* Company + period */}
                 <div className="md:col-span-4 md:pr-8">
                   <p className="font-serif text-2xl md:text-3xl text-foreground leading-tight mb-2">{job.company}</p>
                   <p className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">{job.period}</p>
                 </div>
 
-                {/* Roles */}
                 <div className="md:col-span-8 flex flex-col gap-12">
                   {job.roles.map((role, roleIndex) => (
                     <div key={roleIndex}>
@@ -417,11 +312,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Guestbook Section */}
-      <GuestbookSection />
+      {/* Contact + Guestbook */}
+      <footer id="contact" className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-border/40">
 
-      {/* Footer */}
-      <footer id="contact" className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto">
+        {/* CTA row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -430,15 +324,15 @@ export default function Home() {
             transition={{ duration: 1 }}
           >
             <h2 className="font-serif text-5xl md:text-7xl lg:text-[6rem] mb-12 leading-[0.95] tracking-tight">Let's keep<br />the systems<br />running.</h2>
-            <a 
-              href="mailto:mattda9@gmail.com" 
+            <a
+              href="mailto:mattda9@gmail.com"
               className="inline-block text-base md:text-lg font-sans font-normal text-muted-foreground hover:text-primary transition-colors border-b border-border/50 hover:border-primary pb-2"
             >
               mattda9@gmail.com
             </a>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -464,8 +358,94 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-        
-        <div className="mt-40 pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs font-sans text-muted-foreground uppercase tracking-[0.15em]">
+
+        {/* Guestbook */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-24 md:mt-32 pt-16 border-t border-border/40"
+        >
+          <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground mb-10">Guestbook</p>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+
+            {/* Form */}
+            <div className="md:col-span-5">
+              <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="gb-name" className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">
+                    Name
+                  </label>
+                  <input
+                    id="gb-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    maxLength={100}
+                    placeholder="Your name"
+                    className="bg-card border border-border/60 rounded-sm px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/50 transition-colors"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="gb-message" className="font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground">
+                    Message
+                  </label>
+                  <textarea
+                    id="gb-message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                    maxLength={500}
+                    rows={4}
+                    placeholder="Leave a message..."
+                    className="bg-card border border-border/60 rounded-sm px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isPending || !name.trim() || !message.trim()}
+                  className="self-start px-8 py-3 bg-foreground text-background font-sans text-xs uppercase tracking-[0.15em] rounded-sm hover:bg-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {isPending ? 'Signing…' : 'Sign the Guestbook'}
+                </button>
+              </form>
+            </div>
+
+            {/* Entries */}
+            <div className="md:col-span-7">
+              {entries.length === 0 ? (
+                <p className="font-sans text-sm text-muted-foreground/50 italic">
+                  No entries yet — be the first to sign!
+                </p>
+              ) : (
+                <div className="flex flex-col gap-4 max-h-[32rem] overflow-y-auto pr-2">
+                  {entries.map((entry, i) => (
+                    <motion.div
+                      key={entry.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.04 }}
+                      className="bg-card border border-border/40 rounded-sm px-6 py-5"
+                    >
+                      <div className="flex items-baseline justify-between gap-4 mb-2">
+                        <p className="font-sans text-sm font-semibold text-foreground truncate">{entry.name}</p>
+                        <p className="font-sans text-xs text-muted-foreground/60 shrink-0">
+                          {formatDistanceToNow(new Date(entry.createdAt), { addSuffix: true })}
+                        </p>
+                      </div>
+                      <p className="font-sans text-sm text-muted-foreground leading-relaxed">{entry.message}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Copyright bar */}
+        <div className="mt-24 pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs font-sans text-muted-foreground uppercase tracking-[0.15em]">
           <p>© {new Date().getFullYear()} Matt Shellenbagrer</p>
           <p>Designed with intention</p>
         </div>
