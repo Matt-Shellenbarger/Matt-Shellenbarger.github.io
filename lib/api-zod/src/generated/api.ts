@@ -51,3 +51,94 @@ export const PostGuestbookResponse = zod.object({
 })
 
 
+/**
+ * Returns overall averages and per-employment-type breakdown
+ * @summary Overall productivity KPI summary
+ */
+export const GetProductivitySummaryResponse = zod.object({
+  "totalEmployees": zod.number(),
+  "avgProductivity": zod.number(),
+  "avgWellbeing": zod.number(),
+  "avgHours": zod.number(),
+  "remoteCount": zod.number(),
+  "inOfficeCount": zod.number(),
+  "productivityGap": zod.number(),
+  "wellbeingGap": zod.number()
+})
+
+
+/**
+ * Returns productivity, well-being, and hours averages per employment type
+ * @summary Stats grouped by employment type
+ */
+export const GetProductivityByTypeResponseItem = zod.object({
+  "employmentType": zod.string(),
+  "count": zod.number(),
+  "avgProductivity": zod.number(),
+  "avgWellbeing": zod.number(),
+  "avgHours": zod.number()
+})
+export const GetProductivityByTypeResponse = zod.array(GetProductivityByTypeResponseItem)
+
+
+/**
+ * Shows how different hours-worked ranges affect productivity and well-being scores
+ * @summary Hours-worked buckets vs scores
+ */
+export const GetProductivityHoursImpactResponseItem = zod.object({
+  "bucket": zod.string(),
+  "minHours": zod.number(),
+  "avgProductivity": zod.number(),
+  "avgWellbeing": zod.number(),
+  "count": zod.number()
+})
+export const GetProductivityHoursImpactResponse = zod.array(GetProductivityHoursImpactResponseItem)
+
+
+/**
+ * Returns individual data points for hours worked vs productivity score, colored by employment type. Capped at 300 rows.
+ * @summary Scatter plot data — hours vs productivity
+ */
+export const GetProductivityScatterResponseItem = zod.object({
+  "employeeId": zod.number(),
+  "employmentType": zod.string(),
+  "hoursWorked": zod.number(),
+  "productivityScore": zod.number(),
+  "wellbeingScore": zod.number()
+})
+export const GetProductivityScatterResponse = zod.array(GetProductivityScatterResponseItem)
+
+
+/**
+ * Returns burnout risk (high hours + low well-being) and high performer (high productivity + high well-being) counts
+ * @summary Burnout risk and high performer counts by employment type
+ */
+export const GetProductivityRiskProfileResponseItem = zod.object({
+  "employmentType": zod.string(),
+  "burnoutRisk": zod.number(),
+  "highPerformers": zod.number(),
+  "total": zod.number()
+})
+export const GetProductivityRiskProfileResponse = zod.array(GetProductivityRiskProfileResponseItem)
+
+
+/**
+ * Returns bucketed distribution of productivity and well-being scores
+ * @summary Score distribution histogram data
+ */
+export const GetProductivityScoreDistributionResponse = zod.object({
+  "productivity": zod.array(zod.object({
+  "bucket": zod.string(),
+  "count": zod.number(),
+  "remote": zod.number(),
+  "inOffice": zod.number()
+})),
+  "wellbeing": zod.array(zod.object({
+  "bucket": zod.string(),
+  "count": zod.number(),
+  "remote": zod.number(),
+  "inOffice": zod.number()
+}))
+})
+
+

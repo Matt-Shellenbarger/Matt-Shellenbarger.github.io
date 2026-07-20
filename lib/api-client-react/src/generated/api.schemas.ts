@@ -23,3 +23,57 @@ export interface CreateGuestbookEntry {
   message: string;
 }
 
+export interface ProductivitySummary {
+  totalEmployees: number;
+  avgProductivity: number;
+  avgWellbeing: number;
+  avgHours: number;
+  remoteCount: number;
+  inOfficeCount: number;
+  productivityGap: number;
+  wellbeingGap: number;
+}
+
+export interface EmploymentTypeStats {
+  employmentType: string;
+  count: number;
+  avgProductivity: number;
+  avgWellbeing: number;
+  avgHours: number;
+}
+
+export interface HoursImpactRow {
+  bucket: string;
+  minHours: number;
+  avgProductivity: number;
+  avgWellbeing: number;
+  count: number;
+}
+
+export interface ScatterPoint {
+  employeeId: number;
+  employmentType: string;
+  hoursWorked: number;
+  productivityScore: number;
+  wellbeingScore: number;
+}
+
+export interface RiskProfileRow {
+  employmentType: string;
+  burnoutRisk: number;
+  highPerformers: number;
+  total: number;
+}
+
+export interface DistributionBucket {
+  bucket: string;
+  count: number;
+  remote: number;
+  inOffice: number;
+}
+
+export interface ScoreDistribution {
+  productivity: DistributionBucket[];
+  wellbeing: DistributionBucket[];
+}
+

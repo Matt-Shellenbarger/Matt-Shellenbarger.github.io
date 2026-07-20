@@ -1,0 +1,27 @@
+kind = "data-app"
+previewPath = "/productivity-dashboards/"
+title = "Worker Productivity Dashboards"
+version = "1.0.0"
+id = "artifacts/productivity-dashboards"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/productivity-dashboards/" ]
+localPort = 21380
+
+[services.development]
+run = "pnpm --filter @workspace/productivity-dashboards run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/productivity-dashboards", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/productivity-dashboards/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21380"
+BASE_PATH = "/productivity-dashboards/"
