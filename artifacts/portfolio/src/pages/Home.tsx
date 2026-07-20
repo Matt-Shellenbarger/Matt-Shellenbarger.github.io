@@ -399,7 +399,7 @@ export default function Home() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="mt-24 md:mt-32 pt-16 border-t border-border/40"
         >
-          <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground mb-10">Guestbook</p>
+          <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground mb-10">Leave Your Mark</p>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
 
             {/* Form */}
