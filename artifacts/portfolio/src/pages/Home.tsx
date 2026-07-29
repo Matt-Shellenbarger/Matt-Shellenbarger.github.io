@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Twitter, Linkedin, Lock, Server, Shield, ArrowUp, Send, Bot, RotateCcw } from 'lucide-react';
 import { useEffect, useCallback } from 'react';
-import heroImage from '@assets/me_1784560759993.jpg';
+import heroImage from '../assets/matt.jpg';
 import { useGetGuestbook, usePostGuestbook } from '@workspace/api-client-react';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef } from 'react';
