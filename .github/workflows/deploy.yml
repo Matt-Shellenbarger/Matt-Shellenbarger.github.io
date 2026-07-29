@@ -38,7 +38,7 @@ jobs:
       - name: Build portfolio
         env:
           PORT: "3000"
-          BASE_PATH: "/Matt-Shellenbarger-Portfolio/"
+          BASE_PATH: "/"
           NODE_ENV: production
         run: pnpm --filter @workspace/portfolio run build
 
