@@ -1,0 +1,2 @@
+- [GitHub SSH setup](github-ssh.md) — SSH key generated at ~/.ssh/id_ed25519; added to Matt-Shellenbarger GitHub account; known_hosts configured for github.com.
+- [GitHub Pages deployment](github-pages.md) — Repo is Matt-Shellenbarger.github.io; deploys via .github/workflows/deploy.yml; BASE_PATH must be "/" for root user site.
